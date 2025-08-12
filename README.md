@@ -21,19 +21,16 @@ A modern, responsive web app that lets users **search and locate any IP address*
 ## 🚀 Live Demo
 
 🌐 [View the Live App](https://your-live-demo-link.com)  
-_(Replace with your deployment URL)_
 
 ---
 
 ## 🛠️ Built With
 
-| Tech | Description |
-|------|-------------|
-| ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white) | Markup and layout |
-| ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white) | Styling and responsive layout |
-| ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black) | Core logic and interactivity |
-| ![Leaflet](https://img.shields.io/badge/-Leaflet-199900?logo=leaflet&logoColor=white) | Map rendering and geolocation |
-| ![IPify](https://img.shields.io/badge/-IPify%20API-blue?logo=data:image/svg+xml;base64,&logoColor=white) | IP Geolocation API |
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&labelColor=E34F26&color=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&labelColor=1572B6&color=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&labelColor=F7DF1E&color=black)
+![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=flat&labelColor=199900&color=white)
+![IPify](https://img.shields.io/badge/IPify%20API-blue?style=flat&labelColor=blue&color=white)
 
 ---
 
