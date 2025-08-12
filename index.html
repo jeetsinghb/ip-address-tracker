@@ -1,0 +1,133 @@
+<!--
+██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗██╗ ██████╗██╗
+██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██║██╔════╝██║
+██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║██║██║     ██║
+██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║██║██║     ╚═╝
+██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██║╚██████╗██╗
+╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝╚═╝
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Page Title -->
+    <title>IP Address Tracker</title>
+
+    <!-- Charset and Viewport -->
+    <meta
+      name="description"
+      content="Lookup and trace any IP address with accurate geolocation, timezone, and ISP details. Visualize IP locations on an interactive map using Leaflet."
+    />
+    <meta
+      name="keywords"
+      content="IP tracker, IP address lookup, geolocation, Leaflet map, IP geolocation, IPify, ISP lookup"
+    />
+    <meta name="author" content="Your Name or Team Name" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+  </head>
+
+  <body>
+    <main>
+      <section id="top">
+        <div class="container">
+          <h1 class="page_title">IP Address Tracker</h1>
+          <h2 class="page_subtitle">
+            Find out the geographical details of any IP address
+          </h2>
+          <div class="input_wrapper">
+            <form id="input_form">
+              <input
+                type="search"
+                id="input_field"
+                class="input_box"
+                autocomplete="off"
+                placeholder="Search for any IP address"
+                required
+              />
+              <button
+                id="lookup_btn"
+                type="submit"
+                class="input_btn"
+                aria-label="Look up IP address"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#333333"
+                >
+                  <path
+                    d="m517.85-480-184-184L376-706.15 602.15-480 376-253.85 333.85-296l184-184Z"
+                  />
+                </svg>
+              </button>
+            </form>
+            <p class="ip__address">
+              Example: <span id="ip_text">8.8.8.8</span>
+              <button id="copy_ip_btn" aria-label="Copy IP address">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#333333"
+                >
+                  <path
+                    d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"
+                  />
+                </svg>
+              </button>
+            </p>
+          </div>
+          <div class="loader" id="loader" style="display: none"></div>
+          <div class="data_blocks">
+            <div class="data_block">
+              <h3>IP Address</h3>
+              <h4 id="ip">-</h4>
+            </div>
+            <div class="data_block">
+              <h3>Location</h3>
+              <h4 id="location">-</h4>
+            </div>
+            <div class="data_block">
+              <h3>Timezone</h3>
+              <h4 id="timezone">-</h4>
+            </div>
+            <div class="data_block">
+              <h3>ISP</h3>
+              <h4 id="isp">-</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div id="map"></div>
+      </section>
+    </main>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./assets/js/index.js"></script>
+  </body>
+</html>
