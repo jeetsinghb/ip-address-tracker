@@ -10,8 +10,7 @@ const ispField = document.getElementById("isp");
 const loader = document.getElementById("loader");
 const mapContainer = document.getElementById("map");
 
-const API_KEY = "";
-let map = null; // Will store Leaflet map instance
+let map = null;
 
 function getCurrentTimeInTimezone(timeZoneString) {
   try {
@@ -23,31 +22,24 @@ function getCurrentTimeInTimezone(timeZoneString) {
       second: "2-digit",
       hour12: false,
     }).format(now);
-  } catch (e) {
-    console.error("Invalid timezone format:", timeZoneString);
+  } catch {
     return "Invalid timezone";
   }
 }
 
-// Fetch the user's current IP and display it
 async function fetchCurrentIP() {
   try {
     const response = await fetch("https://api.ipify.org/?format=json");
     const data = await response.json();
-    console.log(data);
     if (currentIP) {
       currentIP.textContent = data?.ip || "8.8.8.8";
     }
-  } catch (error) {
-    if (currentIP) {
-      currentIP.textContent = "8.8.8.8";
-    }
+  } catch {
+    if (currentIP) currentIP.textContent = "8.8.8.8";
   }
 }
-
 fetchCurrentIP();
 
-// Copy IP to clipboard
 copyBtn.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(currentIP.textContent);
@@ -57,12 +49,10 @@ copyBtn.addEventListener("click", async () => {
   }
 });
 
-// Handle form submission
 inputForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const trimmedValue = inputField.value.trim();
-
   if (!trimmedValue) {
     alert("Please enter a valid IP address.");
     return;
@@ -71,54 +61,40 @@ inputForm.addEventListener("submit", async (e) => {
   await fetchIpDetails(trimmedValue);
 });
 
-// Fetch IP details from IPify API
 async function fetchIpDetails(ip) {
   try {
     if (loader) loader.style.display = "block";
-    if (mapContainer) mapContainer.style.display = "none"; // Hide map by default
+    if (mapContainer) mapContainer.style.display = "none";
 
-    const response = await fetch(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=${ip}`
-    );
+    const response = await fetch(`/api/ip?ip=${encodeURIComponent(ip)}`);
 
     if (!response.ok) {
       throw new Error("Invalid input or IP not found.");
     }
 
     const data = await response.json();
-    console.log(data);
 
-    // Filling details
     ipField.textContent = data.ip || "N/A";
-    locationField.textContent = `${data.location?.city || "N/A"}, ${
-      data.location?.region || "N/A"
-    }`;
-    // timezoneField.textContent = data.location?.timezone || "N/A";
+    locationField.textContent = `${data.location?.city || "N/A"}, ${data.location?.region || "N/A"}`;
+
     if (data.location?.timezone) {
-      const currentTime = getCurrentTimeInTimezone(data.location.timezone);
-      timezoneField.textContent = `${data.location.timezone} (${currentTime})`;
+      timezoneField.textContent = `${data.location.timezone} (${getCurrentTimeInTimezone(data.location.timezone)})`;
     } else {
       timezoneField.textContent = "N/A";
     }
+
     ispField.textContent = data.isp || "N/A";
 
-    // Show map container only if location exists
     if (data.location?.lat && data.location?.lng) {
       mapContainer.style.display = "block";
+      if (map) map.remove();
 
-      // Remove previous map instance if exists
-      if (map) {
-        map.remove();
-      }
-
-      // Initialize new map
       map = L.map("map").setView([data.location.lat, data.location.lng], 14);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(map);
 
-      // Add marker
       L.marker([data.location.lat, data.location.lng]).addTo(map);
     }
   } catch (error) {

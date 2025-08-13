@@ -1,0 +1,14 @@
+# Ignore environment variables file
+.env
+
+# macOS system files
+.DS_Store
+
+# Node modules (if you ever add npm packages later)
+node_modules/
+
+# Vercel build output
+.vercel
+
+# Optional: log files
+*.log
